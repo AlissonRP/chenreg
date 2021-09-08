@@ -1,67 +1,69 @@
 
 #' @export
 #'
-chen_reg.fit<- function (y, X, tau=0.5,link="log", diag=1)
+chen_reg.fit= function (formula,data,tau,link="log", diag=1)
 {
 
-
+  #==================== Escolha da Funcao de ligacao==================#
   if(link=="log"){
-    ginv_lig<-function(c){exp(c)}
-    g_lig<-function(c){log(c)}}
+    ginv_lig=function(c){exp(c)}
+    g_lig=function(c){log(c)}}
   if(link=="sqrt")
   {
-    ginv_lig<-function(c){c^2}
-    g_lig<-function(c){sqrt(c)}
+    ginv_lig=function(c){c^2}
+    g_lig=function(c){sqrt(c)}
   }
 
-
-  require(VaRES)
-  y <- na.omit(y)
+  data=data[,c(which(colnames(data)==formula[[2]]),which(colnames(data)!=formula[[2]]))]
+  `%>%` = magrittr::`%>%`
+  y=data[,1] %>%
+    unlist()
   n=length(y)
   if ( min(y) < 0)
     stop("OUT OF RANGE!")
-  dados=cbind(y, X)
-
-
-  ynew <- g_lig(y)
-  ajuste <- lm(ynew~X[,-1])
-  mqo <- c(ajuste$coef)
-  res=summary(ajuste)
+  ##===== Chute ======
+  X=model.matrix(formula, data)
+  mqo=lm.fit(as.matrix(X), unlist(log(data[,formula[[2]]]))) %>%
+    .$coefficients
   lambdac=0.6
 
-  par <- round(c(as.numeric(lambdac), as.numeric(mqo)), 2)
+
+  par = round(c(as.numeric(lambdac), as.numeric(mqo)), 2)
 
 
-
-  lvero=function(theta, dados)
+  ##=====Fun??o logverossimilan?a=====================================================
+  lvero=function(theta, data)
   {
-    n=length(dados[,1])
+    n=nrow(data[,1])
     lambda=theta[1]
-    y=dados[,1]
-    X=dados[,-1]
-    beta <- theta[2:length(theta)]
+    y=data[,1] %>%
+      unlist()
+    X=model.matrix(formula, data)
+    beta = theta[2:length(theta)]
 
-    eta <- X%*%as.matrix(beta)
-    md <- ginv_lig(eta)
+    eta = X%*%as.matrix(beta)
+    md = ginv_lig(eta)
 
-
-    lv=suppressWarnings(log(log(1- tau)/(1- exp(md^lambda)))+ log(lambda)+(lambda-1)*log(y)+
-                          (log(1- tau)/(1- exp(md^lambda)))*(1- exp(y^lambda))+(y^lambda))
+    lv=suppressWarnings(log(log(1-tau)/(1- exp(md^lambda)))+ log(lambda)+(lambda-1)*log(y)+
+                          (log(1-tau)/(1- exp(md^lambda)))*(1- exp(y^lambda))+(y^lambda))
     return(sum(lv))
   }
 
 
 
 
-  escore <- function(theta, dados)
+
+  ##=== fun??o escore (vetor das derivadas da logverossimilhan?a)===========================
+  escore = function(theta, data)
   {
-    lambda <- theta[1]
-    beta <- theta[2:length(theta)]
-    y=dados[,1]
-    X=dados[,-1]
+    lambda = theta[1]
+    beta = theta[2:length(theta)]
+    y=data[,1] %>%
+      unlist()
+    X=model.matrix(formula, data)
 
     eta=as.vector(X%*%as.matrix(beta))
-    md <- ginv_lig(eta)
+    md = ginv_lig(eta)
     mB = as.vector(-(lambda*md^(lambda-1)*exp(md^lambda)*(exp(md^lambda)+
                                                             log(1- tau)*exp(y^lambda)-log(1- tau)-1))/((exp(md^lambda)-1)^2))
     mL=as.vector(((-log(1- tau)*y^lambda*log(y)*exp(y^lambda)+(md^lambda)*log(md)*exp(md^lambda))/(1-exp(md^lambda)))
@@ -69,16 +71,16 @@ chen_reg.fit<- function (y, X, tau=0.5,link="log", diag=1)
                    1/lambda+y^lambda*log(y)+log(y))
 
 
-    mT <- diag(exp(eta))
+    mT = diag(exp(eta))
 
-    Ulambda <- sum(mL)
-    Ubeta <- t(X)%*% mT %*% mB
+    Ulambda = sum(mL)
+    Ubeta = t(X)%*% mT %*% mB
 
-    rval <- c(Ulambda,Ubeta)
+    rval = c(Ulambda,Ubeta)
     return(rval)
   }
-  tempo <- Sys.time()
-  opt=optim(par, lvero, dados=dados, gr=escore, method = "BFGS", hessian = T,
+  tempo = Sys.time()
+  opt=optim(par, lvero, data=data, gr=escore, method = "BFGS", hessian = T,
             control = list(fnscale = -1, maxit = 2000, reltol = 1e-10))
 
 
@@ -86,72 +88,75 @@ chen_reg.fit<- function (y, X, tau=0.5,link="log", diag=1)
     warning("FUNCTION DID NOT CONVERGE!")
 
 
-  z <- c()
-  z$conv <- opt$conv
-  coef <- (opt$par)[1:(1+ncol(X))]
-  names(coef) <- c("lambda",c(paste("beta",1:ncol( as.matrix(X) ),sep="")))
-  z$coeff <- coef
+  z = c()
+  z$conv = opt$conv
+  coef = (opt$par)[1:(1+ncol(X))]
+  names(coef) = c("lambda",c(paste("beta",1:ncol( as.matrix(X) ),sep="")))
+  z$coeff = coef
 
-  lambda <-coef[1]
-  beta <- coef[2:length(coef)]
+  lambda =coef[1]
+  beta = coef[2:length(coef)]
 
-  z$lambda <- lambda
+  z$lambda = lambda
 
-  etahat <- X%*%as.matrix(beta)
-  muhat <- ginv_lig(etahat)
+  etahat = X%*%as.matrix(beta)  #estimativa do g(b;x)
+  muhat = ginv_lig(etahat)      #estimativa do q=g^-1(b;x)
 
-
-  lvero2<-function(param){
-    lambda<-param[1]
-    md<-param[2]
+  ##=====C?lculo do R2===================================================
+  lvero2=function(param){
+    lambda=param[1]
+    md=param[2]
     lv2=suppressWarnings(log(log(1- tau)/(1- exp(md^lambda)))+ log(lambda)+(lambda-1)*log(y)+
                            (log(1- tau)/(1- exp(md^lambda)))*(1- exp(y^lambda))+(y^lambda))
     sum(lv2)
   }
 
-  opt0=optim(c(lambda,muhat),lvero2,control=list(fnscale=-1,maxit = 1000),method="BFGS")
+  opt0=optim(c(lambda,muhat),lvero2,control=list(fnscale=-1,maxit = 1000),method="BFGS") #emv sem reg
 
 
-  R2_calc<- 1-exp(-(2/n)*(opt$value-opt0$value))
+  R2_calc= 1-exp(-(2/n)*(opt$value-opt0$value))
 
 
-  z$fitted <- muhat
-  z$etahat <- etahat
-  z$serie <- y
-  z$X <- X
-  z$chen <- names(coef)
+  z$fitted = muhat
+  z$etahat = etahat
+  z$serie = y
+  z$X = X
+  z$chen = names(coef)
   z$tau= tau
   z$link=link
 
+  ##=======================================================================================
+  # res?duo quant?lico
+
+  delta = (log(1- tau))/(1-(exp(muhat^lambda)))
+  z$residual = qnorm(VaRES::pchen(y, b=lambda, lambda=delta, log.p=FALSE, lower.tail=TRUE))
+  residc = z$residual
 
 
-  ETA <- (log(1- tau))/(1-(exp(muhat^lambda)))
-  z$residual = qnorm(pchen(y, b=lambda, lambda=ETA, log.p=FALSE, lower.tail=TRUE))
-  residc <- z$residual
+
+  z$vcov =-opt$hessian %>%
+    solve()
+
+  z$stderror= z %>%
+    .$vcov %>%
+    diag() %>%
+    sqrt()
 
 
+  z$zstat = abs(z$coeff/z$stderror)
+  z$pvalues = 2*(1 - pnorm(z$zstat) )
+
+  z$loglik = opt$value
+  z$counts = as.numeric(opt$counts[1])
+  z$aic = -2*z$loglik+2*(1+length(beta))
+  z$bic = -2*z$loglik+log(n)*(1+length(beta))
+  z$r2 = R2_calc
 
 
-  vcov <- solve(-opt$hessian)
-  z$vcov <- vcov
+  model_presentation = cbind(round(z$coef,4),round(z$stderror,4),round(z$zstat,4),round(z$pvalues,4))
+  colnames(model_presentation)=c("Estimate","Std. Error","z value","Pr(>|z|)")
 
-  stderror <- sqrt(diag(vcov))
-  z$stderror <- stderror
-
-  z$zstat <- abs(z$coef/stderror)
-  z$pvalues <- 2*(1 - pnorm(z$zstat) )
-
-  z$loglik <- opt$value
-  z$counts <- as.numeric(opt$counts[1])
-  z$aic <- -2*z$loglik+2*(1+length(beta))
-  z$bic <- -2*z$loglik+log(n)*(1+length(beta))
-  z$r2 <- R2_calc
-
-
-  model_presentation <- cbind(round(z$coef,4),round(z$stderror,4),round(z$zstat,4),round(z$pvalues,4))
-  colnames(model_presentation)<-c("Estimate","Std. Error","z value","Pr(>|z|)")
-
-  z$model <- model_presentation
+  z$model = model_presentation
   if( diag==1){
     print(model_presentation)
     print(" ",quote=F)
@@ -166,8 +171,6 @@ chen_reg.fit<- function (y, X, tau=0.5,link="log", diag=1)
   return(z)
 
 }
-
-
 
 
 
