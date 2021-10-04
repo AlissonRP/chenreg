@@ -156,7 +156,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
 
-  z$presentation <- function(){
+  z$presentation <- function(...){
     print(model_presentation)
     print(" ", quote = F)
     print(c("Log-likelihood:", round(z$loglik, 4)), quote = F)
