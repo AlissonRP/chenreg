@@ -96,12 +96,12 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
 
   z <- c()
   z$conv <- opt$conv
-  coef <- (opt$par)[1:(1 + ncol(X))]
-  names(coef) <- c("lambda", c(paste("beta", 1:ncol(as.matrix(X)), sep = "")))
-  z$coeff <- coef
+  coefficients <- (opt$par)[1:(1 + ncol(X))]
+  names(coefficients) <- c("lambda", c(paste("beta", 1:ncol(as.matrix(X)), sep = "")))
+  z$coefficients <- coefficients
 
-  lambda <- coef[1]
-  beta <- coef[2:length(coef)]
+  lambda <- coefficients[1]
+  beta <- coefficients[2:length(coefficients)]
 
   z$lambda <- lambda
 
@@ -117,7 +117,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
   R2_calc <- 1 - exp(-(2 / n) * (opt$value - opt0$value))
 
 
-  z$fitted <- muhat
+  z$fitted.values <- muhat
   z$etahat <- etahat
   z$serie <- y
   z$X <- X
