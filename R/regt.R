@@ -1,7 +1,7 @@
 
 #' @export
 #'
-chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
+chen_reg.fit <- function(formula, data, tau, link = "log") {
 
   # ==================== Escolha da Funcao de ligacao==================#
   if (link == "log") {
@@ -156,8 +156,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
 
-  z$model <- model_presentation
-  if (diag == 1) {
+  z$presentation <- function(){
     print(model_presentation)
     print(" ", quote = F)
     print(c("Log-likelihood:", round(z$loglik, 4)), quote = F)
