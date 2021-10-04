@@ -22,7 +22,6 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
   }
 
   data <- data[, c(which(colnames(data) == formula[[2]]), which(colnames(data) != formula[[2]]))]
-  `%>%` <- magrittr::`%>%`
   y <- data[, 1] %>%
     unlist()
   n <- length(y)
@@ -39,9 +38,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
   lvero <- function(theta, data) {
     n <- nrow(data[, 1])
     lambda <- theta[1]
-    y <- data[, 1] %>%
-      unlist()
-    X <- model.matrix(formula, data)
+
     beta <- theta[2:length(theta)]
 
     eta <- X %*% as.matrix(beta)
@@ -51,13 +48,10 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
                              (log(1 - tau) / (1 - exp(md^lambda))) * (1 - exp(y^lambda)) + (y^lambda))
     return(sum(lv))
   }
- #### ESCORE ###### (srf)
+
   escore <- function(theta, data) {
     lambda <- theta[1]
     beta <- theta[2:length(theta)]
-    y <- data[, 1] |>
-      unlist()
-    X <- model.matrix(formula, data)
 
     eta <- as.vector(X %*% as.matrix(beta))
     md <- ginv_lig(eta)
@@ -76,7 +70,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log", diag = 1) {
     rval <- c(Ulambda, Ubeta)
     return(rval)
   }
-#-LERO2##### (srf)
+
   lvero2=function(param){
     lambda=param[1]
     md=param[2]
