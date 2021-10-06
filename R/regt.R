@@ -129,7 +129,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
   # res?duo quant?lico
 
   delta <- (log(1 - tau)) / (1 - (exp(muhat^lambda)))
-  z$residual <- qnorm(VaRES::pchen(y, b = lambda, lambda = delta))
+  z$residual <- qnorm(pchen(y, b = lambda, lambda = delta))
   residc <- z$residual
 
 
