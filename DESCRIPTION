@@ -1,11 +1,10 @@
 Package: chenReg
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Quantile Regression Chen Distribution
 Version: 0.1.0
 Author: Alisson Rosa
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Regression modeling the quartile of variables that have Chen distribution
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
