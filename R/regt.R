@@ -34,7 +34,8 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
     .$coefficients
   lambdac <- 0.6
 
-  ####lvero##### será removida futuramente (srf)
+
+  #### lvero##### será removida futuramente (srf)
   lvero <- function(theta, data) {
     n <- nrow(data[, 1])
     lambda <- theta[1]
@@ -49,6 +50,7 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
     return(sum(lv))
   }
 
+
   escore <- function(theta, data) {
     lambda <- theta[1]
     beta <- theta[2:length(theta)]
@@ -56,10 +58,10 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
     eta <- as.vector(X %*% as.matrix(beta))
     md <- ginv_lig(eta)
     mB <- as.vector(-(lambda * md^(lambda - 1) * exp(md^lambda) * (exp(md^lambda) +
-                                                                     log(1 - tau) * exp(y^lambda) - log(1 - tau) - 1)) / ((exp(md^lambda) - 1)^2))
+      log(1 - tau) * exp(y^lambda) - log(1 - tau) - 1)) / ((exp(md^lambda) - 1)^2))
     mL <- as.vector(((-log(1 - tau) * y^lambda * log(y) * exp(y^lambda) + (md^lambda) * log(md) * exp(md^lambda)) / (1 - exp(md^lambda)))
-                    + ((log(1 - tau) * (md^lambda) * log(md) * exp(md^lambda) * (1 - exp(y^lambda))) / ((1 - exp(md^lambda))^2)) +
-                      1 / lambda + y^lambda * log(y) + log(y))
+    + ((log(1 - tau) * (md^lambda) * log(md) * exp(md^lambda) * (1 - exp(y^lambda))) / ((1 - exp(md^lambda))^2)) +
+      1 / lambda + y^lambda * log(y) + log(y))
 
 
     mT <- diag(exp(eta))
@@ -71,11 +73,11 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
     return(rval)
   }
 
-  lvero2=function(param){
-    lambda=param[1]
-    md=param[2]
-    lv2=suppressWarnings(log(log(1- tau)/(1- exp(md^lambda)))+ log(lambda)+(lambda-1)*log(y)+
-                           (log(1- tau)/(1- exp(md^lambda)))*(1- exp(y^lambda))+(y^lambda))
+  lvero2 <- function(param) {
+    lambda <- param[1]
+    md <- param[2]
+    lv2 <- suppressWarnings(log(log(1 - tau) / (1 - exp(md^lambda))) + log(lambda) + (lambda - 1) * log(y) +
+      (log(1 - tau) / (1 - exp(md^lambda))) * (1 - exp(y^lambda)) + (y^lambda))
     sum(lv2)
   }
 
@@ -156,15 +158,15 @@ chen_reg.fit <- function(formula, data, tau, link = "log") {
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
 
-  z$presentation <- function(...){
+  z$presentation <- function(...) {
     print(model_presentation)
-    print(" ", quote = F)
-    print(c("Log-likelihood:", round(z$loglik, 4)), quote = F)
-    print(c("Number of iterations in BFGS optim:", z$counts), quote = F)
-    print(c("AIC:", round(z$aic, 4), " BIC:", round(z$bic, 4)), quote = F)
-    print("Residuals:", quote = F)
+    cat(" \n")
+    cat(paste0("Log-likelihood: ",round(z$loglik, 4)),"\n")
+    cat(c("Number of iterations in BFGS optim:", z$counts),"\n")
+    cat(c("AIC:", round(z$aic, 4), " BIC:", round(z$bic, 4)), "\n")
+    cat("Residuals:\n")
     print(summary(as.vector(residc)))
-    print(c("R-squared:", round(z$r2, 4)), quote = F)
+    cat(c("R-squared:",round(z$r2, 4)))
   }
 
   return(z)

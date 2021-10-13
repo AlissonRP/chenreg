@@ -2,9 +2,7 @@
 lvero <- function(theta, data) {
   n <- nrow(data[, 1])
   lambda <- theta[1]
-  y <- data[, 1] %>%
-    unlist()
-  X <- model.matrix(formula, data)
+
   beta <- theta[2:length(theta)]
 
   eta <- X %*% as.matrix(beta)
