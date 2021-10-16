@@ -1,6 +1,18 @@
 
-#' @export
+#' chen_reg.fit
 #'
+#' function to fit the  Quantile Regression
+#'
+#' @param formula 	an object of class "formula" (or one that can be coerced to that class):
+#'                  a symbolic description of the model to be fitted
+#' @param  data   an optional data frame, list or environment (or object coercible by as.data.frame to a data frame)
+#'                containing the variables in the model.
+#' @param tau     a number that indicates the quantile that you want to fit the regression
+#' @param link    a string that indicates the link function that you want to fit the regression
+#'
+#' @return não sei
+#'
+#' @export
 chen_reg.fit <- function(formula, data, tau, link = "log") {
 
   # ==================== Escolha da Funcao de ligacao==================#
