@@ -13,7 +13,7 @@
 #' @return não sei
 #'
 #' @export
-chen_reg.fit <- function(formula, data, tau, link = "log") {
+chen_reg.fit <- function(formula, data, tau, link) {
 
   # ==================== Escolha da Funcao de ligacao==================#
   if (link == "log") {

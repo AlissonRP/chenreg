@@ -4,7 +4,7 @@
 \alias{chen_reg.fit}
 \title{chen_reg.fit}
 \usage{
-chen_reg.fit(formula, data, tau, link = "log")
+chen_reg.fit(formula, data, tau, link)
 }
 \arguments{
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
@@ -17,6 +17,9 @@ containing the variables in the model.}
 
 \item{link}{a string that indicates the link function that you want to fit the regression}
 }
+\value{
+não sei
+}
 \description{
-chen_reg.fit
+function to fit the  Quantile Regression
 }
