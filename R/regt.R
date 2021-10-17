@@ -181,5 +181,24 @@ chen_reg.fit <- function(formula, data, tau, link) {
     cat(c("R-squared:",round(z$r2, 4)))
   }
 
-  return(z)
+z$call=match.call()
+
+
+  print.lm <- function( digits = max(3L, getOption("digits") - 3L))
+  {
+    cat("\nCall:\n",
+        paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+      cat("Coefficients:\n")
+      print.default(format(coefficients, digits = digits),
+                    print.gap = 2L, quote = FALSE)
+
+  }
+
+z$call=print.lm()
+
+
+
+
+
+
 }
