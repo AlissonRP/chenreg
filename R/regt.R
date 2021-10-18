@@ -42,7 +42,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   }
   ## ===== Chute ======
   X <- model.matrix(formula, data)
-  mqo <- lm.fit(as.matrix(X), unlist(log(data[, formula[[2]]]))) %>%
+  mqo <- lm.fit(as.matrix(X), unlist(g_lig(data[, formula[[2]]]))) %>%
     .$coefficients
   lambdac <- 0.6
 
@@ -159,13 +159,17 @@ chen_reg.fit <- function(formula, data, tau, link) {
 
   z$zstat <- abs(z$coeff / z$stderror)
   z$pvalues <- 2 * (1 - pnorm(z$zstat))
+  z
 
   z$loglik <- opt$value
   z$counts <- as.numeric(opt$counts[1])
-  z$aic <- -2 * z$loglik + 2 * (1 + length(beta))
-  z$bic <- -2 * z$loglik + log(n) * (1 + length(beta))
-  z$r2 <- R2_calc
 
+  #metrics
+
+  z$metrics$aic <- -2 * z$loglik + 2 * (1 + length(beta))
+  z$metrics$bic <- -2 * z$loglik + log(n) * (1 + length(beta))
+  z$metrics$r2 <- R2_calc
+  z$metrics$rmse= sqrt(mean((z$fitted.values-z$serie)^2))
 
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
@@ -175,26 +179,29 @@ chen_reg.fit <- function(formula, data, tau, link) {
     cat(" \n")
     cat(paste0("Log-likelihood: ",round(z$loglik, 4)),"\n")
     cat(c("Number of iterations in BFGS optim:", z$counts),"\n")
-    cat(c("AIC:", round(z$aic, 4), " BIC:", round(z$bic, 4)), "\n")
+    cat(c("AIC:", round(z$metrics$aic, 4), " BIC:", round(z$metrics$bic, 4)), " Rmse" , round(z$metrics$rmse,4),"\n")
     cat("Residuals:\n")
     print(summary(as.vector(residc)))
-    cat(c("R-squared:",round(z$r2, 4)))
+    cat(c("R-squared:",round(z$metrics$r2, 4)))
   }
 
-z$call=match.call()
+cal=match.call()
 
 
-  print.lm <- function( digits = max(3L, getOption("digits") - 3L))
+  print_fit <- function( digits = max(3L, getOption("digits") - 3L))
   {
     cat("\nCall:\n",
-        paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+        paste(deparse(cal), sep = "\n", collapse = "\n"), "\n\n", sep = "")
       cat("Coefficients:\n")
       print.default(format(coefficients, digits = digits),
                     print.gap = 2L, quote = FALSE)
 
   }
 
-z$call=print.lm()
+z$call=print_fit()
+
+
+z()
 
 
 
