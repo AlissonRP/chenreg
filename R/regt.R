@@ -201,7 +201,7 @@ cal=match.call()
 z$call=print_fit()
 
 
-z()
+z
 
 
 
