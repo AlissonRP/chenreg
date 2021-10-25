@@ -33,6 +33,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
     }
   }
 
+
   data <- data[, c(which(colnames(data) == formula[[2]]), which(colnames(data) != formula[[2]]))]
   y <- data[, 1] %>%
     unlist()
@@ -110,6 +111,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
 
   z <- c()
   z$conv <- opt$conv
+  class(z) <- c(if(is.matrix(y)) "mlm", "lm")
   coefficients <- (opt$par)[1:(1 + ncol(X))]
   names(coefficients) <- c("lambda", c(paste("beta", 1:ncol(as.matrix(X)), sep = "")))
   z$coefficients <- coefficients
@@ -138,6 +140,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   z$chen <- names(coef)
   z$tau <- tau
   z$link <- link
+  z$rank <- ncol(X)
 
   ## =======================================================================================
   # res?duo quant?lico
@@ -185,20 +188,21 @@ chen_reg.fit <- function(formula, data, tau, link) {
     cat(c("R-squared:",round(z$metrics$r2, 4)))
   }
 
-cal=match.call()
+z$call=match.call()
 
 
-  print_fit <- function( digits = max(3L, getOption("digits") - 3L))
+  print_fit <- function(digits = max(3L, getOption("digits") - 3L))
   {
     cat("\nCall:\n",
-        paste(deparse(cal), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+        paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
       cat("Coefficients:\n")
       print.default(format(coefficients, digits = digits),
                     print.gap = 2L, quote = FALSE)
 
   }
 
-z$call=print_fit()
+
+
 
 
 z
