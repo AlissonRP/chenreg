@@ -5,10 +5,11 @@
 #'
 #' @param formula 	an object of class "formula" (or one that can be coerced to that class):
 #'                  a symbolic description of the model to be fitted
-#' @param  data   an optional data frame, list or environment (or object coercible by as.data.frame to a data frame)
+#' @param  data   data frame, list or environment (or object coercible by as.data.frame to a data frame)
 #'                containing the variables in the model.
 #' @param tau     a number that indicates the quantile that you want to fit the regression
-#' @param link    a string that indicates the link function that you want to fit the regression
+#' @param link    string that indicates the link function that you want to fit the regression. Either
+#'                "log"
 #'
 #' @return não sei
 #'
@@ -191,15 +192,15 @@ chen_reg.fit <- function(formula, data, tau, link) {
 z$call=match.call()
 
 
-  print_fit <- function(digits = max(3L, getOption("digits") - 3L))
-  {
-    cat("\nCall:\n",
-        paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-      cat("Coefficients:\n")
-      print.default(format(coefficients, digits = digits),
-                    print.gap = 2L, quote = FALSE)
+print_fit <- function(digits = max(3L, getOption("digits") - 3L))
+{
+  cat("\nCall:\n",
+      paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+  cat("Coefficients:\n")
+  print.default(format(coefficients, digits = digits),
+                print.gap = 2L, quote = FALSE)
 
-  }
+}
 
 
 

@@ -1,16 +1,18 @@
-#' Simulated envelop for chen distribution
+#' chen_envlp
 #'
-#' @param z 	a model created by chen_reg.fit
-#'                  a symbolic description of the model to be fitted
-#' @param  b   Quantity of resamples
+#' Create a graph called a simulated envelope to see if the model fits the chen distribution well.
+#'
+#' @param z  a model created by chen_reg.fit
+#'
+#' @param  b  quantity of resamples
 
 
 
 #' @export
 chen_envlp=function(z,b){
 z$residual %>%
-  as_tibble() %>%
-  ggplot(aes(sample = V1)) +
+  as.data.frame() %>%
+  ggplot2::ggplot(aes(sample = V1)) +
   qqplotr::geom_qq_band(alpha = 0.5, fill="white", col="black",B=b,bandType = "boot") +
   qqplotr::stat_qq_line(size=0.5, linetype="dashed") +
   qqplotr::stat_qq_point(size=1.2) +

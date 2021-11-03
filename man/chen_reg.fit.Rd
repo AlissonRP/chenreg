@@ -10,12 +10,13 @@ chen_reg.fit(formula, data, tau, link)
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
 a symbolic description of the model to be fitted}
 
-\item{data}{an optional data frame, list or environment (or object coercible by as.data.frame to a data frame)
+\item{data}{data frame, list or environment (or object coercible by as.data.frame to a data frame)
 containing the variables in the model.}
 
 \item{tau}{a number that indicates the quantile that you want to fit the regression}
 
-\item{link}{a string that indicates the link function that you want to fit the regression}
+\item{link}{string that indicates the link function that you want to fit the regression. Either
+"log" or "sqrt"}
 }
 \value{
 não sei

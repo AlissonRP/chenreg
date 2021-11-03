@@ -2,16 +2,15 @@
 % Please edit documentation in R/chen_envlp.R
 \name{chen_envlp}
 \alias{chen_envlp}
-\title{Simulated envelop for chen distribution}
+\title{chen_envlp}
 \usage{
 chen_envlp(z, b)
 }
 \arguments{
-\item{z}{a model created by chen_reg.fit
-a symbolic description of the model to be fitted}
+\item{z}{a model created by chen_reg.fit}
 
-\item{b}{Quantity of resamples}
+\item{b}{quantity of resamples}
 }
 \description{
-Simulated envelop for chen distribution
+Create a graph called a simulated envelope to see if the model fits the chen distribution well.
 }
