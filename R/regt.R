@@ -9,7 +9,7 @@
 #'                containing the variables in the model.
 #' @param tau     a number that indicates the quantile that you want to fit the regression
 #' @param link    string that indicates the link function that you want to fit the regression. Either
-#'                "log"
+#'                "log" or "sqrt"
 #'
 #' @return não sei
 #'
