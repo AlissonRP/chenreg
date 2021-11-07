@@ -44,7 +44,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   }
   ## ===== Chute ======
   X <- model.matrix(formula, data)
-  mqo <- lm.fit(as.matrix(X), unlist(g_lig(data[, formula[[2]]]))) %>%
+  mqo <- lm.fit(as.matrix(X), unlist(g_lig(y))) %>%
     .$coefficients
   lambdac <- 0.6
 
