@@ -3,5 +3,6 @@
 export("%>%")
 export(chen_envlp)
 export(chen_reg.fit)
+export(chen_summary)
 export(lvero2)
 importFrom(magrittr,"%>%")
