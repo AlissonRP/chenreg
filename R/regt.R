@@ -44,7 +44,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   }
   ## ===== Chute ======
   X <- model.matrix(formula, data)
-  mqo <- lm.fit(as.matrix(X), unlist(g_lig(data[, formula[[2]]]))) %>%
+  mqo <- lm.fit(as.matrix(X), unlist(g_lig(y))) %>%
     .$coefficients
   lambdac <- 0.6
 
@@ -114,7 +114,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   z$conv <- opt$conv
   class(z) <- c(if(is.matrix(y)) "mlm", "lm")
   coefficients <- (opt$par)[1:(1 + ncol(X))]
-  names(coefficients) <- c("lambda", c(paste("beta", 1:ncol(as.matrix(X)), sep = "")))
+  names(coefficients) <- c("lambda",colnames(X))
   z$coefficients <- coefficients
 
   lambda <- coefficients[1]
@@ -177,6 +177,8 @@ chen_reg.fit <- function(formula, data, tau, link) {
 
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
+
+
 
   z$presentation <- function(...) {
     print(model_presentation)
