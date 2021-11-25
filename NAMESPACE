@@ -2,6 +2,7 @@
 
 export("%>%")
 export(chen_envlp)
+export(chen_rand)
 export(chen_reg.fit)
 export(chen_summary)
 export(lvero2)

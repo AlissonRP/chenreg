@@ -46,7 +46,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   X <- model.matrix(formula, data)
   mqo <- lm.fit(as.matrix(X), unlist(g_lig(y))) %>%
     .$coefficients
-  lambdac <- 0.6
+  lambdac <- 0.7
 
 
   #### lvero##### será removida futuramente (srf)
@@ -185,7 +185,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
     cat(" \n")
     cat(paste0("Log-likelihood: ",round(z$loglik, 4)),"\n")
     cat(c("Number of iterations in BFGS optim:", z$counts),"\n")
-    cat(c("AIC:", round(z$metrics$aic, 4), " BIC:", round(z$metrics$bic, 4)), " Rmse" , round(z$metrics$rmse,4),"\n")
+    cat(c("AIC:", round(z$metrics$aic, 4), " BIC:", round(z$metrics$bic, 4)), " RMSE:" , round(z$metrics$rmse,4),"\n")
     cat("Residuals:\n")
     print(summary(as.vector(residc)))
     cat(c("R-squared:",round(z$metrics$r2, 4)))
