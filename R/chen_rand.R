@@ -18,3 +18,4 @@ chen_rand <- function(n, md, lambda, tau) {
   y <- (log(1 - (log(1 - u) / (log(1 - tau) / (1 - exp(md^lambda))))))^(1 / lambda)
   return(y)
 }
+

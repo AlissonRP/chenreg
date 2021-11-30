@@ -13,3 +13,5 @@ Imports:
     ggplot2,
     magrittr,
     qqplotr
+Depends: 
+    R (>= 2.10)
