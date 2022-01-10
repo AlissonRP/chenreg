@@ -4,7 +4,7 @@
 \alias{chen_envlp}
 \title{chen_envlp}
 \usage{
-chen_envlp(z, b)
+chen_envlp(z, b = 100)
 }
 \arguments{
 \item{z}{a model created by chen_reg.fit}
