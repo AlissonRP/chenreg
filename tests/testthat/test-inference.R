@@ -1,4 +1,5 @@
 library(chenReg)
+set.seed(42)
 modell=chenReg::chen_reg.fit(Y ~.,data=simu[,-1],tau=0.5, link="log")
 modelsq=chenReg::chen_reg.fit(Y ~.,data=simu[,-1],tau=0.9, link='sqrt')
 model=chenReg::chen_reg.fit(Y ~.,data=simu,tau=0.1, link="log")
@@ -10,3 +11,19 @@ test_that('residuals ok',{
 test_that('residuals not ok',
           {expect_false(-0.2<mean(model$residual) & mean(model$residual)<0.2)
 })
+
+test_that('p-values  ok',
+          {expect_true(modell$pvalues |> sum() <0.1)
+            expect_true(modelsq$pvalues |> sum() <0.1)
+
+          })
+model$pvalues[is.nan(model$pvalues)] <- NA
+test_that('p-values not ok',
+          {expect_true(is.na(model$pvalues) |> sum() >=1)
+
+          })
+
+
+
+
+
