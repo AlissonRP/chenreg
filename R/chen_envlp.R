@@ -9,13 +9,13 @@
 
 
 #' @export
-chen_envlp=function(z,b=100){
-z$residual %>%
-  as.data.frame() %>%
-  ggplot2::ggplot(ggplot2::aes(sample = V1)) +
-  qqplotr::geom_qq_band(alpha = 0.5, fill="white", col="black",B=b,bandType = "boot") +
-  qqplotr::stat_qq_line(size=0.5, linetype="dashed") +
-  qqplotr::stat_qq_point(size=1.2) +
-  ggplot2::scale_fill_discrete("Bandtype")+
-  ggplot2::labs(x = "Quantis teóricos", y = "Quantis amostrais")
+chen_envlp <- function(z, b = 100) {
+  z$residual %>%
+    as.data.frame() %>%
+    ggplot2::ggplot(ggplot2::aes(sample = V1)) +
+    qqplotr::geom_qq_band(alpha = 0.5, fill = "white", col = "black", B = b, bandType = "boot") +
+    qqplotr::stat_qq_line(size = 0.5, linetype = "dashed") +
+    qqplotr::stat_qq_point(size = 1.2) +
+    ggplot2::scale_fill_discrete("Bandtype") +
+    ggplot2::labs(x = "Quantis teóricos", y = "Quantis amostrais")
 }

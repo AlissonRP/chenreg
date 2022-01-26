@@ -14,7 +14,7 @@ Create a summary of the model in the format of `data.frame`
 }
 \examples{
 
-modell=chenReg::chen_reg.fit(Y ~.,data=simu[,-1],tau=0.5, link="log")
+modell <- chenReg::chen_reg.fit(Y ~ ., data = simu[, -1], tau = 0.5, link = "log")
 modell |>
-chen_summary()
+  chen_summary()
 }

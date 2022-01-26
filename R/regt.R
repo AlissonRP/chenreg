@@ -60,7 +60,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
     md <- ginv_lig(eta)
 
     lv <- suppressWarnings(log(log(1 - tau) / (1 - exp(md^lambda))) + log(lambda) + (lambda - 1) * log(y) +
-                             (log(1 - tau) / (1 - exp(md^lambda))) * (1 - exp(y^lambda)) + (y^lambda))
+      (log(1 - tau) / (1 - exp(md^lambda))) * (1 - exp(y^lambda)) + (y^lambda))
     return(sum(lv))
   }
 
@@ -112,9 +112,9 @@ chen_reg.fit <- function(formula, data, tau, link) {
 
   z <- c()
   z$conv <- opt$conv
-  class(z) <- c(if(is.matrix(y)) "mlm", "lm")
+  class(z) <- c(if (is.matrix(y)) "mlm", "lm")
   coefficients <- (opt$par)[1:(1 + ncol(X))]
-  names(coefficients) <- c("lambda",colnames(X))
+  names(coefficients) <- c("lambda", colnames(X))
   z$coefficients <- coefficients
 
   lambda <- coefficients[1]
@@ -168,12 +168,12 @@ chen_reg.fit <- function(formula, data, tau, link) {
   z$loglik <- opt$value
   z$counts <- as.numeric(opt$counts[1])
 
-  #metrics
+  # metrics
 
   z$metrics$aic <- -2 * z$loglik + 2 * (1 + length(beta))
   z$metrics$bic <- -2 * z$loglik + log(n) * (1 + length(beta))
   z$metrics$r2 <- R2_calc
-  z$metrics$rmse= sqrt(mean((z$fitted.values-z$serie)^2))
+  z$metrics$rmse <- sqrt(mean((z$fitted.values - z$serie)^2))
 
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
@@ -183,36 +183,31 @@ chen_reg.fit <- function(formula, data, tau, link) {
   z$presentation <- function(...) {
     print(model_presentation)
     cat(" \n")
-    cat(paste0("Log-likelihood: ",round(z$loglik, 4)),"\n")
-    cat(c("Number of iterations in BFGS optim:", z$counts),"\n")
-    cat(c("AIC:", round(z$metrics$aic, 4), " BIC:", round(z$metrics$bic, 4)), " RMSE:" , round(z$metrics$rmse,4),"\n")
+    cat(paste0("Log-likelihood: ", round(z$loglik, 4)), "\n")
+    cat(c("Number of iterations in BFGS optim:", z$counts), "\n")
+    cat(c("AIC:", round(z$metrics$aic, 4), " BIC:", round(z$metrics$bic, 4)), " RMSE:", round(z$metrics$rmse, 4), "\n")
     cat("Residuals:\n")
     print(summary(as.vector(residc)))
-    cat(c("R-squared:",round(z$metrics$r2, 4)))
+    cat(c("R-squared:", round(z$metrics$r2, 4)))
   }
 
-z$call=match.call()
+  z$call <- match.call()
 
 
-print_fit <- function(digits = max(3L, getOption("digits") - 3L))
-{
-  cat("\nCall:\n",
-      paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-  cat("Coefficients:\n")
-  print.default(format(coefficients, digits = digits),
-                print.gap = 2L, quote = FALSE)
-
-}
-
-
-
-
-
-z
+  print_fit <- function(digits = max(3L, getOption("digits") - 3L)) {
+    cat("\nCall:\n",
+      paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n",
+      sep = ""
+    )
+    cat("Coefficients:\n")
+    print.default(format(coefficients, digits = digits),
+      print.gap = 2L, quote = FALSE
+    )
+  }
 
 
 
 
 
-
+  z
 }
