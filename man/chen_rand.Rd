@@ -4,7 +4,7 @@
 \alias{chen_rand}
 \title{chen_rand}
 \usage{
-chen_rand(n, md, lambda, tau)
+chen_rand(n, md, lambda = 0.1, tau = 0.8)
 }
 \arguments{
 \item{n}{number of observations. If length(n) > 1, the length is taken to be the number required}
@@ -20,4 +20,13 @@ random generation for the chen distribution.
 The  reparameterized chen distribution has density:
 \deqn{f(y;\lambda,\mu,\tau)=log(1-\tau)/(1-e^{\mu^\lambda}) \lambda y^{\lambda-1}
 e^[[log(1-\tau)/1-exp(\mu^\lambda)][1-exp(y^\lambda)]+y^\lambda ]}
+}
+\examples{
+n <- 500
+lambda <- 1
+beta <- c(2.5, -2, 3)
+X <- cbind(runif(n), runif(n), runif(n))
+eta <- X \%*\% as.matrix(beta)
+md <- exp(eta)
+rand <- chenReg::chen_rand(n, md, lambda, tau=0.7)
 }
