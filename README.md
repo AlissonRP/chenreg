@@ -2,7 +2,7 @@
 The most well-known regression models in the literature are based on the assumption
 of normality. However, this assumption is not always satisfied in practice. As a consequence, the present package aims to develop the Chen quantile regression model, so a reparametrization of the Chen distribution in terms of the quantile was developed and a regression structure was inserted for its
 modeling. 
-Package in R to regression modeling the quantile of variables that have Chen distribution
+
 ## Instalation
 ```r
 devtools::install_github("https://github.com/AlissonRP/chenReg")

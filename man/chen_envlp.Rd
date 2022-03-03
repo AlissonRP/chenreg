@@ -7,10 +7,13 @@
 chen_envlp(z, b = 100)
 }
 \arguments{
-\item{z}{a model created by chen_reg.fit}
+\item{z}{a model created by `chen_reg.fit`}
 
 \item{b}{quantity of resamples}
 }
 \description{
-Create a graph called a simulated envelope to see if the model fits the chen distribution well.
+Create a simulated envelope to see if the model fits the chen distribution well.
+}
+\note{
+by default the quantity of resamples is 100
 }
