@@ -2,7 +2,7 @@
 #'
 #' Create a summary of the model in the format of `data.frame`
 #'
-#' @param z  a model created by chen_reg.fit
+#' @param z  a model created by `chen_reg.fit`
 #'
 #' @export
 #'

@@ -1,4 +1,4 @@
-#' @export
+
 #'
 lvero2 <- function(param) {
   lambda <- param[1]

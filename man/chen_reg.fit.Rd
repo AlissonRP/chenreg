@@ -18,9 +18,6 @@ containing the variables in the model.}
 \item{link}{string that indicates the link function that you want to fit the regression. Either
 "log" or "sqrt"}
 }
-\value{
-não sei
-}
 \description{
-function to fit the  Quantile Regression
+used to fit the  quantile regression
 }

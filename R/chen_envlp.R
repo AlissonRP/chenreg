@@ -7,10 +7,9 @@
 #' @param  b  quantity of resamples
 #'
 #' @example
-#' chenReg::chen_reg.fit(Y~.,link = 'log', tau = 0.5,data = chenReg::simu[,-1]) |>
-#' chenReg::chen_envlp()
+#' chenReg::chen_reg.fit(Y~.,link = 'log', tau = 0.5,data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
 #'
-#'@note by default the quantity of resamples is 100
+#' @note by default the quantity of resamples is 100
 
 
 #' @export
@@ -22,8 +21,5 @@ chen_envlp <- function(z, b = 100) {
     qqplotr::stat_qq_line(size = 0.5, linetype = "dashed") +
     qqplotr::stat_qq_point(size = 1.2) +
     ggplot2::scale_fill_discrete("Bandtype") +
-    ggplot2::labs(x = "Quantis teóricos", y = "Quantis amostrais")
+    ggplot2::labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 }
-
-
-

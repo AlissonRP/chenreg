@@ -7,7 +7,7 @@
 chen_summary(z)
 }
 \arguments{
-\item{z}{a model created by chen_reg.fit}
+\item{z}{a model created by `chen_reg.fit`}
 }
 \description{
 Create a summary of the model in the format of `data.frame`
