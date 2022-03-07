@@ -1,17 +1,20 @@
 Package: chenReg
 Type: Package
 Title: Quantile Regression Chen Distribution
-Version: 0.1.0
+Version: 0.1
 Author: Alisson Rosa
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: Regression modeling the quartile of variables that have Chen distribution
+Description: Regression modeling the quantile of variables that have Chen distribution
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     ggplot2,
     magrittr,
     qqplotr
 Depends: 
     R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
