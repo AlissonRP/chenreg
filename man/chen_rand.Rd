@@ -2,7 +2,9 @@
 % Please edit documentation in R/chen_rand.R
 \name{chen_rand}
 \alias{chen_rand}
-\title{chen_rand}
+\title{chen_rand
+Generates a random vector using a Chen distribution. Thus,
+the `chen_norm()` function simulates random variables having a specified Chen Distribution.}
 \usage{
 chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 }
@@ -16,7 +18,9 @@ chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 \item{tau}{indicates the quantile}
 }
 \description{
-random generation for the chen distribution.
+chen_rand
+Generates a random vector using a Chen distribution. Thus,
+the `chen_norm()` function simulates random variables having a specified Chen Distribution.
 }
 \details{
 The  reparameterized chen distribution has density:
@@ -36,5 +40,4 @@ X <- cbind(runif(n), runif(n), runif(n))
 eta <- X \%*\% as.matrix(beta)
 md <- exp(eta)
 rand <- chenReg::chen_rand(n, md, lambda, tau = 0.7)
-
 }

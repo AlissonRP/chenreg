@@ -1,13 +1,13 @@
 #' chen_envlp
 #'
-#' Create a simulated envelope to see if the model fits the chen distribution well.
+#' Create a simulated envelope to see if the model fits the  Chen distribution well.
 #'
 #' @param z  a model created by `chen_reg.fit`
 #'
 #' @param  b  quantity of resamples
 #'
 #' @example
-#' chenReg::chen_reg.fit(Y~.,link = 'log', tau = 0.5,data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
+#' chenReg::chen_reg.fit(Y~., link = 'log', tau = 0.5,data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
 #'
 #' @note by default the quantity of resamples is 100
 

@@ -10,7 +10,7 @@ chen_summary(z)
 \item{z}{a model created by `chen_reg.fit`}
 }
 \description{
-Create a summary of the model in the format of `data.frame`
+Create a formatted summary of the model in the format of `data.frame`
 }
 \examples{
 

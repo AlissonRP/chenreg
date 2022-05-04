@@ -21,3 +21,7 @@ containing the variables in the model.}
 \description{
 used to fit the  quantile regression
 }
+\examples{
+chen_reg.fit(Y ~V2 + V3, data = simu[, -1], tau = 0.5, link = "log")
+chen_reg.fit(Y ~ ., data = simu[, -1], tau = 0.5, link = "log") # . use all variables in `data` except `Y`
+}

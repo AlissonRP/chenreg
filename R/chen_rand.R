@@ -1,6 +1,7 @@
 #' chen_rand
+#' Generates a random vector using a Chen distribution. Thus,
+#' the `chen_norm()` function simulates random variables having a specified Chen Distribution.
 #'
-#'  random generation for the chen distribution.
 #'
 #' @param n  number of observations. If length(n) > 1, the length is taken to be the number required
 #'

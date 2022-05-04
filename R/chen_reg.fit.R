@@ -10,8 +10,9 @@
 #' @param tau     a number that indicates the quantile that you want to fit the regression
 #' @param link    string that indicates the link function that you want to fit the regression. Either
 #'                "log" or "sqrt"
-#'
-#'
+#'@examples
+#'chen_reg.fit(Y ~V2 + V3, data = simu[, -1], tau = 0.5, link = "log")
+#'chen_reg.fit(Y ~ ., data = simu[, -1], tau = 0.5, link = "log") # . use all variables in `data` except `Y`
 #' @export
 chen_reg.fit <- function(formula, data, tau, link) {
 

@@ -12,7 +12,7 @@ chen_envlp(z, b = 100)
 \item{b}{quantity of resamples}
 }
 \description{
-Create a simulated envelope to see if the model fits the chen distribution well.
+Create a simulated envelope to see if the model fits the  Chen distribution well.
 }
 \note{
 by default the quantity of resamples is 100
