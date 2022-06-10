@@ -10,12 +10,13 @@
 #' @param tau     a number that indicates the quantile that you want to fit the regression
 #' @param link    string that indicates the link function that you want to fit the regression. Either
 #'                "log" or "sqrt"
-#'
-#'
+#'@examples
+#'chen_reg.fit(data = simu[, -1],Y ~V2 + V3, tau = 0.5, link = "log")
+#'chen_reg.fit(data = simu[, -1],Y ~ ., tau = 0.5, link = "log") # . use all variables in `data` except `Y`
 #' @export
-chen_reg.fit <- function(formula, data, tau, link) {
+chen_reg.fit <- function(data, formula, tau, link) {
 
-  # ==================== Escolha da Funcao de ligacao==================#
+  #link function#
   if (link == "log") {
     ginv_lig <- function(c) {
       exp(c)
@@ -124,7 +125,7 @@ chen_reg.fit <- function(formula, data, tau, link) {
   etahat <- X %*% as.matrix(beta) # estimativa do g(b;x)
   muhat <- ginv_lig(etahat) # estimativa do q=g^-1(b;x)
 
-  ## =====C?lculo do R2===================================================
+  ##R2 ============
 
 
   opt0 <- optim(c(lambda, muhat), lvero2, control = list(fnscale = -1, maxit = 1000), method = "BFGS") # emv sem reg

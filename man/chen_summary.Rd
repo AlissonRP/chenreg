@@ -10,11 +10,11 @@ chen_summary(z)
 \item{z}{a model created by `chen_reg.fit`}
 }
 \description{
-Create a summary of the model in the format of `data.frame`
+Create a formatted summary of the model in the format of `data.frame`
 }
 \examples{
 
-modell <- chenReg::chen_reg.fit(Y ~ ., data = simu[, -1], tau = 0.5, link = "log")
+modell <- chenReg::chen_reg.fit(data = simu[, -1], formula = Y ~ ., tau = 0.5, link = "log")
 modell |>
-  chen_summary()
+  chenReg::chen_summary()
 }

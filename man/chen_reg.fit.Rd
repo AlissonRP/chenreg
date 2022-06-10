@@ -4,14 +4,14 @@
 \alias{chen_reg.fit}
 \title{chen_reg.fit}
 \usage{
-chen_reg.fit(formula, data, tau, link)
+chen_reg.fit(data, formula, tau, link)
 }
 \arguments{
-\item{formula}{an object of class "formula" (or one that can be coerced to that class):
-a symbolic description of the model to be fitted}
-
 \item{data}{data frame, list or environment (or object coercible by as.data.frame to a data frame)
 containing the variables in the model.}
+
+\item{formula}{an object of class "formula" (or one that can be coerced to that class):
+a symbolic description of the model to be fitted}
 
 \item{tau}{a number that indicates the quantile that you want to fit the regression}
 
@@ -20,4 +20,8 @@ containing the variables in the model.}
 }
 \description{
 used to fit the  quantile regression
+}
+\examples{
+chen_reg.fit(data = simu[, -1],Y ~V2 + V3, tau = 0.5, link = "log")
+chen_reg.fit(data = simu[, -1],Y ~ ., tau = 0.5, link = "log") # . use all variables in `data` except `Y`
 }

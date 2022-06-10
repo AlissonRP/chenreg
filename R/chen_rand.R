@@ -1,6 +1,7 @@
 #' chen_rand
+#' Generates a random vector using a Chen distribution. Thus,
+#' the `chen_norm()` function simulates random variables having a specified Chen Distribution.
 #'
-#'  random generation for the chen distribution.
 #'
 #' @param n  number of observations. If length(n) > 1, the length is taken to be the number required
 #'
@@ -27,6 +28,9 @@
 #' Default of tau is 0.8
 #' @export
 chen_rand <- function(n = 1, md, lambda = 0.1, tau = 0.8) {
+  if(any(c(md, lambda, tau, n))<0){
+    stop('All of the arguments must be positive')
+  }
   u <- runif(n)
   y <- (log(1 - (log(1 - u) / (log(1 - tau) / (1 - exp(md^lambda))))))^(1 / lambda)
   return(y)
