@@ -8,9 +8,9 @@
 #'
 #' @examples
 #'
-#' modell <- chenReg::chen_reg.fit(Y ~ ., data = simu[, -1], tau = 0.5, link = "log")
+#' modell <- chenReg::chen_reg.fit(data = simu[, -1], formula = Y ~ ., tau = 0.5, link = "log")
 #' modell |>
-#'   chen_summary()
+#'   chenReg::chen_summary()
 chen_summary <- function(z) {
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
   colnames(model_presentation) <- c("estimate", "std_error", "z_value", "p_value")
