@@ -3,9 +3,14 @@ Type: Package
 Title: Quantile Regression Chen Distribution
 Version: 0.5
 Author: Alisson Rosa
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: Regression modeling the quantile of variables that have Chen distribution
-License: MIT
+Maintainer: The package maintainer alirpereira887@gmail.com
+Description: The most well-known regression models in the literature are based 
+    on the assumption of normality. However, this assumption is not always satisfied
+    in practice. As a consequence, the present package aims to develop the 
+    Chen quantile regression model, so a reparametrization of the Chen distribution 
+    in terms of the quantile was developed and a regression structure was inserted 
+    for its modeling.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.0

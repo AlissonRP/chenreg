@@ -1,21 +1,33 @@
 
-#' chen_reg.fit
+#' chen_reg
 #'
-#' used to fit the  quantile regression
+#' chen_reg is used to fit the chen regression, specified by giving the
+#' formula, the quantile, and the link function.
 #'
-#' @param formula 	an object of class "formula" (or one that can be coerced to that class):
+#' @param formula 	an object of class "formula" (or one that can be coerced
+#' to that class):
 #'                  a symbolic description of the model to be fitted
-#' @param  data   data frame, list or environment (or object coercible by as.data.frame to a data frame)
+#' @param  data   data frame, list or environment (or object coercible by
+#' as.data.frame to a data frame)
 #'                containing the variables in the model.
-#' @param tau     a number that indicates the quantile that you want to fit the regression
-#' @param link    string that indicates the link function that you want to fit the regression. Either
+#' @param tau     a number that indicates the quantile that you want to fit
+#' the regression
+#' @param link    string that indicates the link function that you want to
+#' fit the regression. Either
 #'                "log" or "sqrt"
 #'@examples
-#'chen_reg.fit(data = simu[, -1],Y ~V2 + V3, tau = 0.5, link = "log")
-#'chen_reg.fit(data = simu[, -1],Y ~ ., tau = 0.5, link = "log") # . use all variables in `data` except `Y`
+#'library(chenReg)
+#'chen_reg(data = simu[, -1], Y ~ V2 + V3, tau = 0.5, link = "log")
+#'chen_reg(data = simu[, -1], Y ~ ., tau = 0.2, link = "log")
+#'
+#' @note
+#' You can specify all variables (except y) to be your covariates using `.`, you
+#' can also add transformation like `log(x1)`
 #' @export
-chen_reg.fit <- function(data, formula, tau, link) {
-
+chen_reg <- function(data, formula, tau, link) {
+  if (tau < 0) {
+    stop("The Quantile must be positive")
+  }
   #link function#
   if (link == "log") {
     ginv_lig <- function(c) {
@@ -38,14 +50,13 @@ chen_reg.fit <- function(data, formula, tau, link) {
   data <- data[, c(which(colnames(data) == formula[[2]]), which(colnames(data) != formula[[2]]))]
   y <- data[, 1] %>%
     unlist()
-  n <- length(y)
   if (min(y) < 0) {
-    stop("OUT OF RANGE!")
+    stop("RESPONSE VARIABLE MUST BE POSITIVE!")
   }
+  n <- length(y)
   ## ===== Chute ======
   X <- model.matrix(formula, data)
-  mqo <- lm.fit(as.matrix(X), unlist(g_lig(y))) %>%
-    .$coefficients
+  mqo <- lm.fit(as.matrix(X), unlist(g_lig(y)))$coefficients
   lambdac <- 0.7
 
 
@@ -90,7 +101,8 @@ chen_reg.fit <- function(data, formula, tau, link) {
   lvero2 <- function(param) {
     lambda <- param[1]
     md <- param[2]
-    lv2 <- suppressWarnings(log(log(1 - tau) / (1 - exp(md^lambda))) + log(lambda) + (lambda - 1) * log(y) +
+    lv2 <- suppressWarnings(log(log(1 - tau) / (1 - exp(md^lambda)))
+                              + log(lambda) + (lambda - 1) * log(y) +
       (log(1 - tau) / (1 - exp(md^lambda))) * (1 - exp(y^lambda)) + (y^lambda))
     sum(lv2)
   }
@@ -98,7 +110,6 @@ chen_reg.fit <- function(data, formula, tau, link) {
   par <- round(c(as.numeric(lambdac), as.numeric(mqo)), 2)
 
 
-  tempo <- Sys.time()
   opt <- optim(par, lvero,
     data = data, gr = escore, method = "BFGS", hessian = T,
     control = list(fnscale = -1, maxit = 2000, reltol = 1e-10)
@@ -155,8 +166,8 @@ chen_reg.fit <- function(data, formula, tau, link) {
   z$vcov <- -opt$hessian %>%
     solve()
 
-  z$stderror <- z %>%
-    .$vcov %>%
+  z$stderror <- z |>
+    with(vcov) %>%
     diag() %>%
     sqrt()
 
@@ -191,7 +202,7 @@ chen_reg.fit <- function(data, formula, tau, link) {
     cat(c("R-squared:", round(z$metrics$r2, 4)))
   }
 
-  z$call <- match.call()
+  z$call <- match.call() # userful when call the objects
 
 
   print_fit <- function(digits = max(3L, getOption("digits") - 3L)) {

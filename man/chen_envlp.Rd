@@ -7,7 +7,7 @@
 chen_envlp(z, b = 100)
 }
 \arguments{
-\item{z}{a model created by `chen_reg.fit`}
+\item{z}{a model created by `chen_reg`}
 
 \item{b}{quantity of resamples}
 }
@@ -18,6 +18,7 @@ Create a simulated envelope to see if the model fits the  Chen distribution well
 by default the quantity of resamples is 100
 }
 \examples{
-chenReg::chen_reg.fit(formula = Y ~., link = 'log', tau = 0.5, data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
+chenReg::chen_reg(formula = Y ~., link = 'log', tau = 0.5,
+data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
 
 }
