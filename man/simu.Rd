@@ -4,7 +4,7 @@
 \name{simu}
 \alias{simu}
 \title{Example Dataset to fit the regression
-Constains five variables}
+Contains five variables}
 \format{
 A dataframe with 300 rows and 4 variables
 }
@@ -16,6 +16,6 @@ simu
 }
 \description{
 Example Dataset to fit the regression
-Constains five variables
+Contains five variables
 }
 \keyword{datasets}

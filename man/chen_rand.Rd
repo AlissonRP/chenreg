@@ -3,8 +3,9 @@
 \name{chen_rand}
 \alias{chen_rand}
 \title{chen_rand
-Generates a random vector using a Chen distribution. Thus,
-the `chen_norm()` function simulates random variables having a specified Chen Distribution.}
+Generates a random vector using the Chen distribution. Thus,
+the `chen_rand()` function simulates random variables having a specified Chen
+ Distribution.}
 \usage{
 chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 }
@@ -19,8 +20,9 @@ chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 }
 \description{
 chen_rand
-Generates a random vector using a Chen distribution. Thus,
-the `chen_norm()` function simulates random variables having a specified Chen Distribution.
+Generates a random vector using the Chen distribution. Thus,
+the `chen_rand()` function simulates random variables having a specified Chen
+ Distribution.
 }
 \details{
 The  reparameterized chen distribution has density:
