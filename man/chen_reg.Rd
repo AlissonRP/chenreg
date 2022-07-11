@@ -4,7 +4,7 @@
 \alias{chen_reg}
 \title{chen_reg}
 \usage{
-chen_reg(data, formula, tau, link)
+chen_reg(data, formula, quantile = 0.5, link = "log")
 }
 \arguments{
 \item{data}{data frame, list or environment (or object coercible by
@@ -15,7 +15,7 @@ as.data.frame to a data frame)
 to that class):
                  a symbolic description of the model to be fitted}
 
-\item{tau}{a number that indicates the quantile that you want to fit
+\item{quantile}{a number that indicates the quantile that you want to fit
 the regression}
 
 \item{link}{string that indicates the link function that you want to
@@ -32,7 +32,7 @@ can also add transformation like `log(x1)`
 }
 \examples{
 library(chenReg)
-chen_reg(data = simu[, -1], Y ~ V2 + V3, tau = 0.5, link = "log")
-chen_reg(data = simu[, -1], Y ~ ., tau = 0.2, link = "log")
+chen_reg(data = simu[, -1], Y ~ V2 + V3, quantile = 0.5, link = "log")
+chen_reg(data = simu[, -1], Y ~ ., quantile = 0.2, link = "log")
 
 }

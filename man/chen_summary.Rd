@@ -18,7 +18,7 @@ knitr
 }
 \examples{
 
-modell <- chenReg::chen_reg(data = simu[, -1], formula = Y ~ ., tau = 0.5, link = "log")
+modell <- chenReg::chen_reg(data = simu[, -1], formula = Y ~ ., quantile = 0.5, link = "log")
 modell |>
   chenReg::chen_summary()
 }
