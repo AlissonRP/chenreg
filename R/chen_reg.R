@@ -159,8 +159,8 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   # res?duo quant?lico
 
   delta <- (log(1 - tau)) / (1 - (exp(muhat^lambda)))
-  z$residual <- qnorm(pchen(y, b = lambda, lambda = delta))
-  residc <- z$residual
+  z$residuals <- qnorm(pchen(y, b = lambda, lambda = delta))
+  residc <- z$residuals
 
 
 
@@ -172,6 +172,9 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
     diag() %>%
     sqrt()
 
+  #if(any(is.na(z$stderror)) || is.nan(z$stderror)){
+    #warning('wait')
+  #}
 
   z$zstat <- abs(z$coeff / z$stderror)
   z$pvalues <- 2 * (1 - pnorm(z$zstat))
@@ -203,7 +206,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
     cat(c("R-squared:", round(z$metrics$r2, 4)))
   }
 
-  z$call <- match.call() # userful when call the objects
+  z$call <- match.call() # useful when call the objects
 
 
   print_fit <- function(digits = max(3L, getOption("digits") - 3L)) {
