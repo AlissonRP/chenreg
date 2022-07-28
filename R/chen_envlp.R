@@ -11,7 +11,8 @@
 #' data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
 #'
 #' @note by default the quantity of resamples is 100
-
+#'
+#' @return Return the simulated envelope in class `ggplot`
 
 #' @export
 chen_envlp <- function(z, b = 100) {

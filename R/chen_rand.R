@@ -27,6 +27,8 @@
 #' Default of lambda is 0.1
 #'
 #' Default of tau is 0.8
+#' @return A vector of size `n`
+#'
 #' @export
 chen_rand <- function(n = 1, md, lambda = 0.1, tau = 0.8) {
   if(any(c(md, lambda, tau, n)<0)){

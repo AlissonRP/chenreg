@@ -13,6 +13,8 @@
 #' @note
 #' This is useful to create formatted tables using functions like `kable` from
 #' `knitr`
+#' @return A `data.frame` with a summary of your model
+#'
 #' @export
 chen_summary <- function(z) {
   model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
