@@ -23,6 +23,10 @@
 #' @note
 #' You can specify all variables (except y) to be your covariates using `.`, you
 #' can also add transformation like `log(x1)`
+#' @return chenReg returns an object of class `lm`
+#' For more information on class `lm` type ?lm on your console
+#'
+#'
 #' @export
 chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   tau = quantile
@@ -55,7 +59,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
     stop("RESPONSE VARIABLE MUST BE POSITIVE!")
   }
   n <- length(y)
-  ## ===== Chute ======
+  ## ===== initial values ======
   X <- model.matrix(formula, data)
   mqo <- lm.fit(as.matrix(X), unlist(g_lig(y)))$coefficients
   lambdac <- 0.7
@@ -156,7 +160,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   z$rank <- ncol(X)
 
   ## =======================================================================================
-  # res?duo quant?lico
+  # residuals
 
   delta <- (log(1 - tau)) / (1 - (exp(muhat^lambda)))
   z$residuals <- qnorm(pchen(y, b = lambda, lambda = delta))
@@ -167,14 +171,19 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   z$vcov <- -opt$hessian %>%
     solve()
 
-  z$stderror <- z |>
+  diag_error = z |>
     with(vcov) %>%
-    diag() %>%
-    sqrt()
+    diag()
 
-  #if(any(is.na(z$stderror)) || is.nan(z$stderror)){
-    #warning('wait')
-  #}
+  if(any(diag_error < 0)) {
+  warning('It was not possible to obtain the estimated standard error')
+  }
+
+
+  z$stderror <- suppressWarnings(diag_error |>
+    sqrt())
+
+
 
   z$zstat <- abs(z$coeff / z$stderror)
   z$pvalues <- 2 * (1 - pnorm(z$zstat))
