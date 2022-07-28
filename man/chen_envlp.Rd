@@ -11,6 +11,9 @@ chen_envlp(z, b = 100)
 
 \item{b}{quantity of resamples}
 }
+\value{
+Return the simulated envelope in class `ggplot`
+}
 \description{
 Create a simulated envelope to see if the model fits the  Chen distribution well.
 }

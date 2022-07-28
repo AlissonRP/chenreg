@@ -18,6 +18,9 @@ chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 
 \item{tau}{indicates the quantile}
 }
+\value{
+A vector of size `n`
+}
 \description{
 chen_rand
 Generates a random vector using the Chen distribution. Thus,

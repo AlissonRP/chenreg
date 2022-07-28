@@ -22,6 +22,10 @@ the regression}
 fit the regression. Either
                "log" or "sqrt"}
 }
+\value{
+chenReg returns an object of class `lm`
+For more information on class `lm` type ?lm on your console
+}
 \description{
 chen_reg is used to fit the chen regression, specified by giving the
 formula, the quantile, and the link function.

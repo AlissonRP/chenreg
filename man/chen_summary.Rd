@@ -9,12 +9,15 @@ chen_summary(z)
 \arguments{
 \item{z}{a model created by `chen_reg`}
 }
+\value{
+A `data.frame` with a summary of your model
+}
 \description{
 Create a formatted summary of the model in the format of `data.frame`
 }
 \note{
-This is useful to create formatted tables using functions like kable from
-knitr
+This is useful to create formatted tables using functions like `kable` from
+`knitr`
 }
 \examples{
 
