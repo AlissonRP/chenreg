@@ -1,8 +1,10 @@
 Package: chenReg
 Type: Package
-Title: Quantile Regression Chen Distribution
+Title: Quantile Regression using Chen Distribution
 Version: 0.5
-Author: Alisson Rosa
+Authors@R: 
+    c(person("Alisson", "Rosa", role = c("aut", "cre"),
+    email = "alirpereira887@gmail.com"))
 Maintainer: The package maintainer <alirpereira887@gmail.com>
 Description: The most well-known regression models in the literature are based 
     on the assumption of normality. However, this assumption is not always 
@@ -24,3 +26,4 @@ Depends:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+BugReports: https://github.com/AlissonRP/chenReg
