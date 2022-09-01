@@ -1,4 +1,5 @@
 #' chen_rand
+#'
 #' Generates a random vector using the Chen distribution. Thus,
 #' the `chen_rand()` function simulates random variables having a specified Chen
 #'  Distribution.
