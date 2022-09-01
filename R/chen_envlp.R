@@ -7,8 +7,8 @@
 #' @param  b  quantity of resamples
 #'
 #' @examples
-#' chenReg::chen_reg(formula = Y ~., link = 'log', quantile = 0.5,
-#' data = chenReg::simu[,-1]) |> chenReg::chen_envlp()
+#' chenreg::chen_reg(formula = Y ~., link = 'log', quantile = 0.5,
+#' data = chenreg::simu[,-1]) |> chenreg::chen_envlp()
 #'
 #' @note by default the quantity of resamples is 100
 #'

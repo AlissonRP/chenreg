@@ -5,10 +5,10 @@ modeling.
 
 ## Installation
 ```r
-devtools::install_github("https://github.com/AlissonRP/chenReg")
+devtools::install_github("https://github.com/AlissonRP/chenreg")
 ```
 * ## Functions
-  * `chen_reg.fit()`: function to fit the  Quantile Regression
+  * `chen_reg`: function to fit the  Quantile Regression
   * `chen_summary()`: Create a summary of the model in the format of `data.frame`
-  * `chen_envlp`: Create a graph called a simulated envelope to see if the model fits the chen distribution well
+  * `chen_envlp`: Create a graph called a simulated envelope to see if the model fits the Chen distribution well
   * `chen_rand`: Random numbers generation from the Chen distribution

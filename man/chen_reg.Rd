@@ -35,7 +35,7 @@ You can specify all variables (except y) to be your covariates using `.`, you
 can also add transformation like `log(x1)`
 }
 \examples{
-library(chenReg)
+library(chenreg)
 chen_reg(data = simu[, -1], Y ~ V2 + V3, quantile = 0.5, link = "log")
 chen_reg(data = simu[, -1], Y ~ ., quantile = 0.2, link = "log")
 

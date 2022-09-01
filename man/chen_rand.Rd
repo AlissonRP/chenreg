@@ -44,5 +44,5 @@ beta <- c(2.5, -2, 3)
 X <- cbind(runif(n), runif(n), runif(n))
 eta <- X \%*\% as.matrix(beta)
 md <- exp(eta)
-rand <- chenReg::chen_rand(n, md, lambda, tau = 0.7)
+rand <- chenreg::chen_rand(n, md, lambda, tau = 0.7)
 }

@@ -16,7 +16,7 @@
 #' fit the regression. Either
 #'                "log" or "sqrt"
 #'@examples
-#'library(chenReg)
+#'library(chenreg)
 #'chen_reg(data = simu[, -1], Y ~ V2 + V3, quantile = 0.5, link = "log")
 #'chen_reg(data = simu[, -1], Y ~ ., quantile = 0.2, link = "log")
 #'

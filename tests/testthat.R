@@ -1,4 +1,4 @@
 library(testthat)
-library(chenReg)
+library(chenreg)
 
-test_check("chenReg")
+test_check("chenreg")
