@@ -7,7 +7,10 @@
 #'
 #' @examples
 #'
-#' modell <- chenreg::chen_reg(data = simu[, -1], formula = Y ~ ., quantile = 0.5, link = "log")
+#' modell <- chenreg::chen_reg(
+#'   data = simu[, -1], formula = Y ~ .,
+#'   quantile = 0.5, link = "log"
+#' )
 #' modell |>
 #'   chenreg::chen_summary()
 #' @note
@@ -17,9 +20,14 @@
 #'
 #' @export
 chen_summary <- function(z) {
-  model_presentation <- cbind(round(z$coef, 4), round(z$stderror, 4), round(z$zstat, 4), round(z$pvalues, 4))
+  model_presentation <- cbind(
+    round(z$coef, 4), round(z$stderror, 4),
+    round(z$zstat, 4), round(z$pvalues, 4)
+  )
   colnames(model_presentation) <- c("estimate", "std_error", "z_value", "p_value")
-  model_presentation[, 4] <- format.pval(model_presentation[, 4], eps = .001, digits = 2)
+  model_presentation[, 4] <- format.pval(model_presentation[, 4],
+    eps = .001,
+    digits = 2
+  )
   return(as.data.frame(model_presentation))
 }
-

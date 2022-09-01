@@ -7,8 +7,10 @@
 #' @param  b  quantity of resamples
 #'
 #' @examples
-#' chenreg::chen_reg(formula = Y ~., link = 'log', quantile = 0.5,
-#' data = chenreg::simu[,-1]) |> chenreg::chen_envlp()
+#' chenreg::chen_reg(
+#'   formula = Y ~ ., link = "log", quantile = 0.5,
+#'   data = chenreg::simu[, -1]
+#' ) |> chenreg::chen_envlp()
 #'
 #' @note by default the quantity of resamples is 100
 #'
@@ -19,10 +21,11 @@ chen_envlp <- function(z, b = 100) {
   z$residual %>%
     as.data.frame() %>%
     ggplot2::ggplot(ggplot2::aes(sample = V1)) +
-    qqplotr::geom_qq_band(alpha = 0.5, fill = "white", col = "black", B = b, bandType = "boot") +
+    qqplotr::geom_qq_band(
+      alpha = 0.5, fill = "white", col = "black", B = b,
+      bandType = "boot"
+    ) +
     qqplotr::stat_qq_point(size = 1.2) +
     ggplot2::scale_fill_discrete("Bandtype") +
     ggplot2::labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 }
-
-
