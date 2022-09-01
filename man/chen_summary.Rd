@@ -21,7 +21,10 @@ This is useful to create formatted tables using functions like `kable` from
 }
 \examples{
 
-modell <- chenreg::chen_reg(data = simu[, -1], formula = Y ~ ., quantile = 0.5, link = "log")
+modell <- chenreg::chen_reg(
+  data = simu[, -1], formula = Y ~ .,
+  quantile = 0.5, link = "log"
+)
 modell |>
   chenreg::chen_summary()
 }

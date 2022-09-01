@@ -2,10 +2,7 @@
 % Please edit documentation in R/chen_rand.R
 \name{chen_rand}
 \alias{chen_rand}
-\title{chen_rand
-Generates a random vector using the Chen distribution. Thus,
-the `chen_rand()` function simulates random variables having a specified Chen
- Distribution.}
+\title{chen_rand}
 \usage{
 chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 }
@@ -22,7 +19,6 @@ chen_rand(n = 1, md, lambda = 0.1, tau = 0.8)
 A vector of size `n`
 }
 \description{
-chen_rand
 Generates a random vector using the Chen distribution. Thus,
 the `chen_rand()` function simulates random variables having a specified Chen
  Distribution.

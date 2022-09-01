@@ -21,7 +21,9 @@ Create a simulated envelope to see if the model fits the  Chen distribution well
 by default the quantity of resamples is 100
 }
 \examples{
-chenreg::chen_reg(formula = Y ~., link = 'log', quantile = 0.5,
-data = chenreg::simu[,-1]) |> chenreg::chen_envlp()
+chenreg::chen_reg(
+  formula = Y ~ ., link = "log", quantile = 0.5,
+  data = chenreg::simu[, -1]
+) |> chenreg::chen_envlp()
 
 }
