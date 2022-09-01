@@ -26,4 +26,4 @@ Depends:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-BugReports: https://github.com/AlissonRP/chenReg
+BugReports: https://github.com/AlissonRP/chenreg
