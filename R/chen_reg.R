@@ -23,8 +23,8 @@
 #' @note
 #' You can specify all variables (except y) to be your covariates using `.`, you
 #' can also add transformation like `log(x1)`
-#' @return chenReg returns an object of class `lm`
-#' For more information on class `lm` type ?lm on your console
+#' @return chenReg returns an object of class `chenreg`
+
 #'
 #'
 #' @export
@@ -134,9 +134,10 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
 
   z <- c()
   z$conv <- opt$conv
-  class(z) <- c(if (is.matrix(y)) "mlm", "lm")
+
   coefficients <- (opt$par)[1:(1 + ncol(X))]
-  names(coefficients) <- c("lambda", colnames(X))
+  z$names = c("lambda", colnames(X))
+  names(coefficients) <- z$names
   z$coefficients <- coefficients
 
   lambda <- coefficients[1]
@@ -176,7 +177,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
 
   delta <- (log(1 - tau)) / (1 - (exp(muhat^lambda)))
   z$residuals <- qnorm(pchen(y, b = lambda, lambda = delta))
-  residc <- z$residuals
+
 
 
 
@@ -248,8 +249,8 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   }
 
 
+  class(z) <- "chenreg"
 
 
-
-  z
+  return(z)
 }
