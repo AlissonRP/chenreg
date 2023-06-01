@@ -3,5 +3,7 @@
 #' @importFrom stats  optim
 #' @importFrom stats  qnorm
 #' @importFrom stats  pnorm
-utils::globalVariables(c("V1", "tau", "y", "X", "formula", "coef", "runif",
-                         "ginv_lig"))
+utils::globalVariables(c(
+  "V1", "tau", "y", "X", "formula", "coef", "runif",
+  "ginv_lig"
+))
