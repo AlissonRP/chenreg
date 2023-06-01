@@ -18,11 +18,12 @@
 #' @examples
 #' library(chenreg)
 #' chen_reg(data = simu[, -1], Y ~ V2 + V3, quantile = 0.5, link = "log")
-#' chen_reg(data = simu[, -1], Y ~ ., quantile = 0.2, link = "log")
+#' chen_reg(data = simu[, -1], Y ~ . - 1, quantile = 0.2, link = "log")
 #'
 #' @note
 #' You can specify all variables (except y) to be your covariates using `.`, you
 #' can also add transformation like `log(x1)`
+#' You can write -1 in the formula to not use intercept in the model.
 #' @return chenReg returns an object of class `chenreg`
 
 #'
@@ -134,6 +135,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
 
   z <- c()
   z$conv <- opt$conv
+  z$formula = formula
 
   coefficients <- (opt$par)[1:(1 + ncol(X))]
   z$names = c("lambda", colnames(X))

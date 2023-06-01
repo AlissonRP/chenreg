@@ -1,13 +1,14 @@
-#' @export predict.generalreg
+#' @export predict.chenreg
 #' @export
 #'
-predict.generalreg <-
+predict.chenreg <-
+
   function(x,  data = NULL){
-    if(is.null(data)){
-      attach(x$X)
-      return(eval_mu(x))
-    } else {
-      attach(data)
-      return(eval_mu(x))
+    X = model.matrix(x$formula, data)
+    if(is.null(data) == TRUE){
+      return(x$fitted.values)
     }
+    etahat <- X %*% as.matrix(x$coefficients[2:length(x$coefficients)])
+    muhat <- exp(etahat)
+    return(muhat)
 }
