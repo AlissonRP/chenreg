@@ -135,10 +135,10 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
 
   z <- c()
   z$conv <- opt$conv
-  z$formula = formula
+  z$formula <- formula
 
   coefficients <- (opt$par)[1:(1 + ncol(X))]
-  z$names = c("lambda", colnames(X))
+  z$names <- c("lambda", colnames(X))
   names(coefficients) <- z$names
   z$coefficients <- coefficients
 

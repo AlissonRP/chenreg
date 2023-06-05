@@ -1,17 +1,23 @@
+#' print.summary.chenreg
+
+
+
 #' @export print.summary.chenreg
 #' @export
 #'
 #'
 print.summary.chenreg <-
-  function(x, digits = max(3, getOption("digits") - 3), ...)
-  {
+  function(x, digits = max(3, getOption("digits") - 3), ...) {
     cat("\nCall:\n",
-        paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
+      paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n",
+      sep = ""
+    )
 
 
     cat("\nResiduals:\n")
     print(structure((as.vector((x$res))),
-                    .Names = c("Min", "1Q", "Median", "3Q", "Max")))
+      .Names = c("Min", "1Q", "Median", "3Q", "Max")
+    ))
 
     cat("\nCoefficients:\n")
     print(structure((x$coefficients)))
@@ -29,5 +35,3 @@ print.summary.chenreg <-
     )
     cat(c("Pseudo R-squared:", round(x$metrics$r2, 4)))
   }
-
-
