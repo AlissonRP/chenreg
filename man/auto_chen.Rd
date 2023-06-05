@@ -15,7 +15,7 @@ auto_chen(
 )
 }
 \arguments{
-\item{y}{is the name of the target variable:}
+\item{y}{is the name of the target variable}
 
 \item{data}{data frame, list or environment (or object coercible by
 as.data.frame to a data frame)
@@ -30,24 +30,23 @@ the regression}
 
 \item{total}{number of combinations}
 
-\item{info}{if is TRUE will print in console the best combination of variables}
-}
-\value{
-chenReg returns an object of class `chenreg`
+\item{info}{if is TRUE will print in console more information}
 }
 \description{
 auto_chen is used to find the best combinations of exogenous variables based
 on the metrics that you interested
 }
 \note{
-You can specify all variables (except y) to be your covariates using `.`, you
-can also add transformation like `log(x1)`
-You can write -1 in the formula to not use intercept in the model.
+the default value of `total` is 50, but if 50
+is more than the possible number of combinations `(k)`,
+then `k` will be used as the total.
 }
 \examples{
 library(chenreg)
 data <- simu[, -1]
-auto_chen("Y", data, metric = "bic", info = T)
+
+auto_chen("Y", data, metric = "rmse", total = 3)
+auto_chen("Y", data, metric = "bic", info = TRUE)
 
 
 }
