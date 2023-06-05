@@ -13,7 +13,7 @@
 #' X <- cbind(runif(n), runif(n), runif(n))
 #' eta <- X %*% as.matrix(beta)
 #' md <- exp(eta)
-#' simu <- chenreg::chen_rand(n, md, lambda, tau = 0.7)
+#' simu <- chenreg::rchen(n, md, lambda, tau = 0.7)
 #'
 #' @source using the function from package
 "simu"
