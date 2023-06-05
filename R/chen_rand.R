@@ -1,4 +1,4 @@
-#' chen_rand
+#' rchen
 #'
 #' Generates a random vector using the Chen distribution. Thus,
 #' the `chen_rand()` function simulates random variables having a specified Chen
@@ -23,7 +23,7 @@
 #' X <- cbind(runif(n), runif(n), runif(n))
 #' eta <- X %*% as.matrix(beta)
 #' md <- exp(eta)
-#' rand <- chenreg::chen_rand(n, md, lambda, tau = 0.7)
+#' rand <- chenreg::rchen(n, md, lambda, tau = 0.7)
 #' @note
 #' Default of lambda is 0.1
 #'
@@ -31,7 +31,7 @@
 #' @return A vector of size `n`
 #'
 #' @export
-chen_rand <- function(n = 1, md, lambda = 0.1, tau = 0.8) {
+rchen <- function(n = 1, md, lambda = 0.1, tau = 0.8) {
   if (any(c(md, lambda, tau, n) < 0)) {
     stop("All of the arguments must be positive")
   }

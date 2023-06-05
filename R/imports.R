@@ -3,5 +3,10 @@
 #' @importFrom stats  optim
 #' @importFrom stats  qnorm
 #' @importFrom stats  pnorm
-utils::globalVariables(c("V1", "tau", "y", "X", "formula", "coef", "runif",
-                         "ginv_lig"))
+#' @importFrom stats shapiro.test
+#' @importFrom graphics hist
+#' @importFrom utils combn
+utils::globalVariables(c(
+  "V1", "tau", "y", "X", "formula", "coef", "runif",
+  "ginv_lig", "quantile", "residc"
+))
