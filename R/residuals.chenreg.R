@@ -1,15 +1,12 @@
 #' residuals.chenreg
 
 
+#' @param object  a model created by `chen_reg`
+#' @param ... further arguments passed to or from other methods.
+#' @rdname residuals.chenreg
 #' @export residuals.chenreg
 #' @export
 residuals.chenreg <-
-  function(x, summary = FALSE) {
-    if (summary == T) {
-      hist(x$residuals,
-        main = "Quantile Residuals",
-        xlab = "Values"
-      )
-    }
-    return(x$residuals)
+  function(object, ...) {
+    return(object$residuals)
   }

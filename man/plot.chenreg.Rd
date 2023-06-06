@@ -4,7 +4,12 @@
 \alias{plot.chenreg}
 \title{plot.chenreg}
 \usage{
-\method{plot}{chenreg}(x)
+\method{plot}{chenreg}(x, ...)
+}
+\arguments{
+\item{x}{a model created by `chen_reg`}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 plot.chenreg

@@ -1,12 +1,13 @@
 #' plot.chenreg
 
 
-
-
+#' @param x  a model created by `chen_reg`
+#' @param ... further arguments passed to or from other methods.
+#'
 #' @export plot.chenreg
 #' @export
 
-plot.chenreg <- function(x) {
+plot.chenreg <- function(x, ...) {
   data = data.frame(residuals = x$residuals, index = 1:length(x$residuals))
     par(ask=TRUE)
     hist(data$residuals,
