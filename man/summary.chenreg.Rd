@@ -4,7 +4,12 @@
 \alias{summary.chenreg}
 \title{summary.chenreg}
 \usage{
-\method{summary}{chenreg}(x)
+\method{summary}{chenreg}(object, ...)
+}
+\arguments{
+\item{object}{a model created by `chen_reg`}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 summary.chenreg

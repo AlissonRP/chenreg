@@ -4,7 +4,12 @@
 \alias{print.chenreg}
 \title{print.chenreg}
 \usage{
-\method{print}{chenreg}(x, digits = max(3, getOption("digits") - 3), ...)
+\method{print}{chenreg}(x, ...)
+}
+\arguments{
+\item{x}{a model created by `chen_reg`}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 print.chenreg

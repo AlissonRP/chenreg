@@ -4,7 +4,15 @@
 \alias{predict.chenreg}
 \title{predict.chenreg}
 \usage{
-\method{predict}{chenreg}(x, data = NULL)
+\method{predict}{chenreg}(object, newdata = NULL, ...)
+}
+\arguments{
+\item{object}{a model created by `chen_reg`}
+
+\item{newdata}{An optional data frame in which to look for variables
+with which to predict. If omitted, the fitted values are used}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 predict.chenreg

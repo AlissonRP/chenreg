@@ -1,13 +1,14 @@
 #' print.summary.chenreg
 
-
-
+#' @param x  a model created by `chen_reg`
+#' @param ... further arguments passed to or from other methods.
+#' @rdname print.summary.chenreg
 #' @export print.summary.chenreg
 #' @export
 #'
 #'
 print.summary.chenreg <-
-  function(x, digits = max(3, getOption("digits") - 3), ...) {
+  function(x,...) {
     cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n",
       sep = ""
@@ -23,7 +24,7 @@ print.summary.chenreg <-
     print(structure((x$coefficients)))
 
     cat("---\n")
-    cat("Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
+    cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
 
     cat("\n")
 

@@ -4,7 +4,12 @@
 \alias{residuals.chenreg}
 \title{residuals.chenreg}
 \usage{
-\method{residuals}{chenreg}(x, summary = FALSE)
+\method{residuals}{chenreg}(object, ...)
+}
+\arguments{
+\item{object}{a model created by `chen_reg`}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 residuals.chenreg
