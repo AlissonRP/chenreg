@@ -16,7 +16,7 @@
 #'
 #' @return Return the simulated envelope in class `ggplot`
 
-#' @export
+
 chen_envlp <- function(z, b = 100) {
   z$residual %>%
     as.data.frame() %>%

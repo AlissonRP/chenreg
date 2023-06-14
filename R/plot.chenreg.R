@@ -15,12 +15,16 @@ plot.chenreg <- function(x, ...) {
          xlab = "Values"
     )
     plot(data$residuals,
-         main = "Residuals vs Index")
+         main = "Residuals vs Index",
+         ylab = "Residuals")
 
     plot(x$residuals, x$fitted.values,
          xlab = "Residuals",
          ylab = "Fitted Values",
          main = "Residuals vs Fitted Values")
+
+    car::qqPlot(x$residuals, col=c("black"), col.lines = "black",
+                ylab = "Residuals", xlab = "Norm Quantiles")
 
     par(ask=FALSE)
 
