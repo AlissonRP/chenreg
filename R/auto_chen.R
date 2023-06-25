@@ -118,7 +118,7 @@ The total value has been adjusted to the maximum possible.")
       count_errors <<- c(count_errors, list(e))
 
       if (info == TRUE){
-      message(paste("the model with ", vars ," not fitted because of an error"))
+      message(paste("the model with ", vars ," not fitted because of an error \n"))
 
 
       print(count_errors)
