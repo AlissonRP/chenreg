@@ -9,6 +9,10 @@
 #'
 print.summary.chenreg <-
   function(x,...) {
+
+    if(x$format == TRUE){
+      print(structure((x$coefficients)))
+    } else {
     cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n",
       sep = ""
@@ -24,7 +28,7 @@ print.summary.chenreg <-
     print(structure((x$coefficients)))
 
     cat("---\n")
-    cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
+
 
     cat("\n")
 
@@ -35,4 +39,5 @@ print.summary.chenreg <-
       " RMSE:", round(x$metrics$rmse, 4), "\n"
     )
     cat(c("Pseudo R-squared:", round(x$metrics$r2, 4)))
+    }
   }

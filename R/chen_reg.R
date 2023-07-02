@@ -239,16 +239,7 @@ chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
   z$call <- match.call() # useful when call the objects
 
 
-  print_fit <- function(digits = max(3L, getOption("digits") - 3L)) {
-    cat("\nCall:\n",
-      paste(deparse(z$call), sep = "\n", collapse = "\n"), "\n\n",
-      sep = ""
-    )
-    cat("Coefficients:\n")
-    print.default(format(coefficients, digits = digits),
-      print.gap = 2L, quote = FALSE
-    )
-  }
+
 
 
   class(z) <- "chenreg"

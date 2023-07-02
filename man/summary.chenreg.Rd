@@ -4,7 +4,7 @@
 \alias{summary.chenreg}
 \title{summary.chenreg}
 \usage{
-\method{summary}{chenreg}(object, ...)
+\method{summary}{chenreg}(object, format = FALSE, ...)
 }
 \arguments{
 \item{object}{a model created by `chen_reg`}
