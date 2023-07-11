@@ -7,16 +7,12 @@
 #' @param  b  quantity of resamples
 #'
 #' @examples
-#' chenreg::chen_reg(
-#'   formula = Y ~ ., link = "log", quantile = 0.5,
-#'   data = chenreg::simu[, -1]
-#' ) |> chenreg::chen_envlp()
-#'
+
 #' @note by default the quantity of resamples is 100
 #'
 #' @return Return the simulated envelope in class `ggplot`
 
-#' @export
+
 chen_envlp <- function(z, b = 100) {
   z$residual %>%
     as.data.frame() %>%

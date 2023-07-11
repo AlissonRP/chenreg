@@ -11,10 +11,14 @@
 #'
 predict.chenreg <-
   function(object, newdata = NULL, ...) {
-    X <- model.matrix(object$formula, newdata)
+    formula = object$formula
+
+    newdata[as.character(formula[[2]])] = 2
     if (is.null(newdata) == TRUE) {
       return(object$fitted.values)
     }
+
+    X <- model.matrix(formula, newdata)
     etahat <- X %*% as.matrix(object$coefficients[2:length(object$coefficients)])
     muhat <- exp(etahat)
     return(muhat)

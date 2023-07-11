@@ -93,7 +93,10 @@ The total value has been adjusted to the maximum possible.")
       expr = {
 
     vars <- paste(X |> names(), collapse = " + ")
-    models <- chen_reg(data.frame(Y, X), Y ~ ., quantile = quantile)
+    df = data.frame(Y, X)
+    colnames(df)[1] = "Y"
+
+    models <- chen_reg(df, Y ~ ., quantile = quantile)
 
     significants <- (\(x) x < alpha)(models$pvalues) |> sum()
     normal_test <- (models$residuals |> shapiro.test())$p.value
@@ -115,7 +118,7 @@ The total value has been adjusted to the maximum possible.")
       count_errors <<- c(count_errors, list(e))
 
       if (info == TRUE){
-      message(paste("the model with ", vars ," not fitted because of an error"))
+      message(paste("the model with ", vars ," not fitted because of an error \n"))
 
 
       print(count_errors)
@@ -140,6 +143,21 @@ The total value has been adjusted to the maximum possible.")
     message(paste("The best variables based on", metric, "is", results[1, 1], "\n"))
   }
 
+  fit = c()
 
-  return(results)
+  fit$args = match.call()
+
+  fit$data = data
+  fit$quantile = quantile
+  fit$y = y
+
+  fit$results = results
+
+  fit$best = results[1,1]
+
+  class(fit) <- "autochen"
+
+  return(fit)
+
+
 }
