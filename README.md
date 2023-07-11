@@ -1,3 +1,9 @@
+# chenreg <img src='man/figures/fig/Rep1.png' align="right" height="130" /></a>
+
+
+
+
+
 # Intro
 The most well-known regression models in the literature are based on the assumption
 of normality. However, this assumption is not always satisfied in practice. As a consequence, the present package aims to develop the Chen quantile regression model, so a reparametrization of the Chen distribution in terms of the quantile was developed and a regression structure was inserted for its
