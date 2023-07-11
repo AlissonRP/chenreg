@@ -1,5 +1,16 @@
 
 
+#' best_chen
+#'
+#'This function is useful when a well-optimized combination of variables
+#'is already known (by `auto_chen`) and the goal is to fit the model using only
+#' those selected covariates
+#'
+#' @param auto_chen  a model created by `auto_chen`
+
+
+
+
 
 #' @export
 best_chen = function(auto_chen){

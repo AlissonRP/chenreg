@@ -7,6 +7,6 @@
 #' @rdname BIC.chenreg
 #' @export BIC.chenreg
 #' @export
-AIC.chenreg = function(object, ...){
+BIC.chenreg = function(object, ...){
   return(object$metrics$bic)
 }

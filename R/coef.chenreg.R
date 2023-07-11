@@ -6,6 +6,6 @@
 #' @rdname coef.chenreg
 #' @export coef.chenreg
 #' @export
-coeff.chenreg = function(object, ...){
+coef.chenreg = function(object, ...){
   return(object$coefficients)
 }

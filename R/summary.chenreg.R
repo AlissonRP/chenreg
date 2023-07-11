@@ -3,6 +3,7 @@
 
 
 #' @param object  a model created by `chen_reg`
+#' @param format print the data.frame of coefficients
 #' @param ... further arguments passed to or from other methods.
 
 #' @export summary.chenreg
