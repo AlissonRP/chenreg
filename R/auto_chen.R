@@ -14,7 +14,7 @@
 #'
 #' @param alpha significance coefficient in hypothesis testing
 #'
-#' @param quantile     a number that indicates the quantile that you want to fit
+#' @param tau     a number that indicates the quantile that you want to fit
 #' the regression
 #'
 #' @param total number of combinations
@@ -41,9 +41,9 @@
 
 
 #' @export
-auto_chen <- function(y, data, metric = "rmse", quantile = 0.5, alpha = 0.05, total = NULL, info = FALSE) {
+auto_chen <- function(y, data, metric = "rmse", tau = 0.5, alpha = 0.05, total = NULL, info = FALSE) {
 
-  if ((((0 < quantile) && (quantile < 1)) && ((0 < alpha) && (alpha < 1))) == FALSE){
+  if ((((0 < tau) && (tau < 1)) && ((0 < alpha) && (alpha < 1))) == FALSE){
     stop("The quantile and alpha must be between 0 and 1")
   }
 
@@ -96,7 +96,7 @@ The total value has been adjusted to the maximum possible.")
     df = data.frame(Y, X)
     colnames(df)[1] = "Y"
 
-    models <- chen_reg(df, Y ~ ., quantile = quantile)
+    models <- chen_reg(df, Y ~ ., tau = tau)
 
     significants <- (\(x) x < alpha)(models$pvalues) |> sum()
     normal_test <- (models$residuals |> shapiro.test())$p.value
@@ -148,7 +148,7 @@ The total value has been adjusted to the maximum possible.")
   fit$args = match.call()
 
   fit$data = data
-  fit$quantile = quantile
+  fit$tau = tau
   fit$y = y
 
   fit$results = results

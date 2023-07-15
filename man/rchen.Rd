@@ -4,12 +4,12 @@
 \alias{rchen}
 \title{rchen}
 \usage{
-rchen(n = 1, md, lambda = 0.1, tau = 0.8)
+rchen(n = 1, quantile, lambda = 0.1, tau = 0.8)
 }
 \arguments{
 \item{n}{number of observations. If length(n) > 1, the length is taken to be the number required}
 
-\item{md}{median}
+\item{quantile}{median}
 
 \item{lambda}{shape parameter}
 

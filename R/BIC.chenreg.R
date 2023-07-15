@@ -1,4 +1,4 @@
-#' BIC.chenreg
+#'BIC.chenreg
 
 #' @param object  a fitted model created by `chen_reg`,
 #' for which there exists the log-likelihood.
