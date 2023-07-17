@@ -14,7 +14,7 @@
 
 #' @export
 best_chen = function(auto_chen){
-  quantile = auto_chen$quantile
+  quantile = auto_chen$tau
   y = auto_chen$y
   data = auto_chen$data
 
