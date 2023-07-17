@@ -10,15 +10,15 @@
 #' @param  data   data frame, list or environment (or object coercible by
 #' as.data.frame to a data frame)
 #'                containing the variables in the model.
-#' @param quantile     a number that indicates the quantile that you want to fit
+#' @param tau     a number that indicates the quantile that you want to fit
 #' the regression
 #' @param link    string that indicates the link function that you want to
 #' fit the regression. Either
 #'                "log" or "sqrt"
 #' @examples
 #' library(chenreg)
-#' chen_reg(data = simu[, -1], Y ~ V2 + V3, quantile = 0.5, link = "log")
-#' chen_reg(data = simu[, -1], Y ~ . - 1, quantile = 0.2, link = "log")
+#' chen_reg(data = simu[, -1], Y ~ V2 + V3, tau = 0.5, link = "log")
+#' chen_reg(data = simu[, -1], Y ~ . - 1, tau = 0.2, link = "log")
 #'
 #' @note
 #' You can specify all variables (except y) to be your covariates using `.`, you
@@ -29,8 +29,7 @@
 #'
 #'
 #' @export
-chen_reg <- function(data, formula, quantile = 0.5, link = "log") {
-  tau <- quantile
+chen_reg <- function(data, formula, tau = 0.5, link = "log") {
   if (tau < 0) {
     stop("The Quantile must be positive")
   }

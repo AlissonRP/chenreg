@@ -8,7 +8,7 @@ auto_chen(
   y,
   data,
   metric = "rmse",
-  quantile = 0.5,
+  tau = 0.5,
   alpha = 0.05,
   total = NULL,
   info = FALSE
@@ -23,7 +23,7 @@ as.data.frame to a data frame)
 
 \item{metric}{metric you are interested in}
 
-\item{quantile}{a number that indicates the quantile that you want to fit
+\item{tau}{a number that indicates the quantile that you want to fit
 the regression}
 
 \item{alpha}{significance coefficient in hypothesis testing}
